@@ -20,11 +20,11 @@ You can visit the application now, on your broweser at `http://localhost:3000`.
 By now, there are no products in the store, as the database for products is not ready. To get products into the database, you need to add some tuples into the collection. To get those, proceed as in a terminal,
 
 `$ mongo` <br/>
-`$ use labmgmt` <br/>
-`$ db.items.insert({pdtID: 'PDT001', pdtName: 'Product 1'})` <br/>
-`$ db.items.insert({pdtID: 'PDT002', pdtName: 'Product 2'})` <br/>
-`$ db.items.insert({pdtID: 'PDT003', pdtName: 'Product 3'})` <br/>
-`$ db.items.insert({pdtID: 'PDT004', pdtName: 'Product 4'})` <br/>
+`> use labmgmt` <br/>
+`> db.items.insert({pdtID: 'PDT001', pdtName: 'Product 1'})` <br/>
+`> db.items.insert({pdtID: 'PDT002', pdtName: 'Product 2'})` <br/>
+`> db.items.insert({pdtID: 'PDT003', pdtName: 'Product 3'})` <br/>
+`> db.items.insert({pdtID: 'PDT004', pdtName: 'Product 4'})` <br/>
 
 **Note:** The above `mongo` commands have field names in certain pattern. Inserting some else pattern would cause errors.
 
