@@ -1,0 +1,25 @@
+<% include partials/head %>
+
+  <body>
+    <div class="col-sm-8 col-sm-offset-2">
+      <div class="text-center">
+        <h1> Lab Management </h1><br>
+        <br><br>
+        <div style="text-align: center; font-weight: bold; font-size: 2.5vh;">
+          <a href="/">Home</a> |
+          <a href="/lab"> Store</a> |
+          <a href="/cart"> Cart</a> |
+          <% if (user == 'Guest') { %>
+            <a href="/login"> Login</a> |
+            <a href="/signup"> Signup</a>
+          <% } else { %>
+            <a href="/profile"> Welcome. <%= user %></a> |
+            <a href="/logout"> Logout</a>
+          <% } %>
+        </div>
+        
+        
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+<% include partials/head %>
+
+  <body>
+    <div class="col-sm-8 col-sm-offset-2">
+      <div class="text-center">
+        <h1> Cart</h1>
+        <br><br>
+        <span class="fa-lft">
+          <a href="/">Home</a> |
+          <a href="/lab"> Store</a> |
+          <a href="/cart"> Cart</a>
+        </span>
+        <span class="fa-rght">
+          <% if(user == "Guest") { %>
+              <a href="/login">Login</a> |
+              <a href="/signup"> SignUp</a>
+          <% } else { %>
+              <a href="/profile">Hi, <%= user %></a>
+              <a href="/logout"> Sign out</a>
+          <% } %>
+        </span>
+        <hr>
+
+        <div>
+
+        
+        <br>
+<% if(cartItems == "") { %>
+    <h3>No Items in Cart </h3>
+    <% } else { %>
+          <table align="center" style="border: 0px solid grey; width:60%;">
+        <% cartItems.forEach(function(equip){ %>
+          <tr><td>
+            <img src='/images/<%= equip.pdtID %>.jpg' height="200" width="200">
+          </td>
+          <td colspan = "3">
+        Product ID : <%= equip.pdtID %><br>
+        Product Name : <a href="/view/<%= equip.pdtID %>"><%= equip.pdtName %></a><br><br>
+        <a type="button" class="btn btn-primary btn-xs" href="/removefromcart/<%= equip.pdtID %>/<%= equip.pdtName %>">Remove from Cart</a>
+        <br><br>
+        
+          </td></tr>
+          <% }); %>
+          <tr>
+            <td colspan="4" style="text-align:right;"><br><br><a type="button" class="btn btn-primary" href="/checkout">Checkout</a></td>
+          </tr>
+          </table>
+      <% } %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

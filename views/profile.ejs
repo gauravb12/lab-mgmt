@@ -1,0 +1,28 @@
+<% include partials/head %>
+
+  <body>
+    <div class="col-sm-8 col-sm-offset-2">
+      <div class="text-center">
+        <h1> User Profile</h1><br>
+        <br><br>
+        <span class="fa-lft">
+          <a href="/">Home</a>
+          <a href="/lab">Store</a>
+          <a href="/cart">Cart</a>
+        </span>
+        <span class="fa-rght">
+          <a href="/profile">Hi, <%= user.firstName %></a>
+          <a href="/logout"> Sign out</a>
+        </span>
+        <hr>
+        
+        <div>
+            <h2>Email : <%= user.email %><br><br>
+            First Name : <%= user.firstName %><br><br>
+            Last Name : <%= user.lastName %><br><br>
+            Roll Number : <%= user.rollNumber %><br><br>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

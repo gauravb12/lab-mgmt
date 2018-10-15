@@ -1,0 +1,44 @@
+<% include partials/head %>
+
+  <body>
+    <div class="col-sm-8 col-sm-offset-2">
+      <div class="text-center">
+        <h1> Store </h1>
+        <br><br>
+        <span class="fa-lft">
+          <a href="/">Home</a> |
+          <a href="/lab"> Store</a> |
+          <a href="/cart"> Cart</a>
+        </span>
+        <span class="fa-rght">
+          <% if(user == "Guest") { %>
+              <a href="/login">Login</a> |
+              <a href="/signup"> SignUp</a>
+          <% } else { %>
+              <a href="/profile">Hi, <%= user %></a>
+              <a href="/logout"> Sign out</a>
+          <% } %>
+        </span>
+        <hr>
+        
+        <div>
+
+          <table align="center" style="border: 1px solid grey; width:60%;">
+        <% labItems.forEach(function(equip){ %>
+          <tr><td>
+            <img src='/images/<%= equip.pdtID %>.jpg' height="200" width="200">
+          </td>
+          <td colspan = "3">
+        Product ID : <%= equip.pdtID %><br>
+        Product Name : <a href="/view/<%= equip.pdtID %>"><%= equip.pdtName %></a><br>
+        <a type="button" clsss="btn btn-primary" href="/addtocart/<%= equip.pdtID %>/<%= equip.pdtName %>">ADD TO CART</a>
+        <br><br>
+        <% }); %>
+          </td></tr>
+          </table>
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

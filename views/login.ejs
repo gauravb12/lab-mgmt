@@ -1,0 +1,50 @@
+<% include partials/head %>
+
+  <body>
+    <div class="col-sm-8 col-sm-offset-2">
+      <div class="jumbotron text-center">
+        <h1><span class="fa fa-sign-in"></span> Login</h1>
+        <br><br>
+        <span class="fa-lft">
+          <a href="/">Home</a> |
+          <a href="/lab"> Store</a> |
+          <a href="/cart"> Cart</a>
+        </span>
+        <span class="fa-rght">
+              <a href="/login">Login</a> |
+              <a href="/signup"> SignUp</a>
+        </span>
+        <hr>
+        <br>
+        <% if (message != null) { %>
+        	<div class="alert-danger"><%= message %></div>
+        <% } %>
+        
+        
+        <form action="/login" method="post">
+          <table style="width:60%; border:0px solid grey; padding: 30px 30px 30px 10px;" align="center">
+          <tr>
+            <td><label>Email : </label></td>
+            <td><br><input type="email" class="form-control" name="email" required><br></td>
+          </tr>
+          <tr>
+            <td><label>Password : </label></td>
+            <td><br><input type="password" class="form-control" name="password" required><br></td>
+          </tr>
+          <tr>
+      <td></td>
+      <td>
+        <br>
+        <input type="submit" name="btn-login" value="LogIn" class="btn btn-primary">
+        <input type="reset" name="btn-reset" value="Reset" class="btn btn-danger"><br><br>
+        Don't have an Account <a href="/signup">Register Here</a>
+      </td>
+      </tr>
+          </table>
+          
+        </form>
+      </div>
+      
+    </div>
+  </body>
+</html>

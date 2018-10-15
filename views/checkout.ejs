@@ -1,0 +1,64 @@
+<% include partials/head %>
+
+  <body>
+    <div class="col-sm-8 col-sm-offset-2">
+      <div class="text-center">
+        <h1> CheckOut </h1>
+        <br><br>
+        <span class="fa-lft">
+          <a href="/">Home</a>
+          <a href="/lab">Store</a>
+          <a href="/cart">Cart</a>
+        </span>
+        <span class="fa-rght">
+          <a href="/profile">Hi, <%= user %></a>
+          <a href="/logout"> Sign out</a>
+        </span>
+        <hr>
+        <div>
+
+      <% if(cartItems != ""){ %>
+      <table align="center" style="border: 0px solid grey; width:60%;">
+  <% 
+  var i = 0;
+  var chckItemsJson = '{"issueItems": []}', qty = [];    
+  cartItems.forEach(function(result1) { 
+      qty[i] = 1;
+      var prdtID = result1.pdtID; 
+      var obj = JSON.parse(chckItemsJson);
+      obj["issueItems"].push({pdtID: result1.pdtID, qty: qty[i]});
+      chckItemsJson = JSON.stringify(obj);  
+
+
+  %>
+          <tr><td>
+            <img src='/images/<%= result1.pdtID %>.jpg' height="200" width="200">
+          </td>
+          <td colspan = "3">
+        Product ID : <%= result1.pdtID %><br>
+        Product Name : <a href="/view/<%= result1.pdtID %>"><%= result1.pdtName %></a><br><br>
+        <br><br>
+        
+          </td></tr>    <% 
+    i = i+1;
+    }); %>
+    </table>    
+  <br><br><br><br>
+  <h4>You have above <%= i %> Items to checkout! </h4>
+
+  <form id="checkoutForm" method="POST" action="checkoutFinal">
+    <input type='hidden' name="checkoutDetail" id="chckoutDetail" value="<%= chckItemsJson %>">
+    <label>Reason : </label><br>
+    <textarea name="reason"></textarea><br>
+    <input type="submit" class="btn btn-primary" value="checkout">
+  </form>
+
+  <% } else { %>
+      <h4>No items in cart! Get Some Items from the <a href="/lab">Store!</a></h4>
+    <% } %>
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
