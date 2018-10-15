@@ -15,20 +15,10 @@ router.get('/', function(req, res, next) {
   else{
     var userx = "Guest";
   }
-  res.render('index', { title: 'DIG | Home', user: userx });
+  res.render('index', { title: 'Lab Management', user: userx });
 });
 
 session.cart = [];
-
-router.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
-
-    // the callback after google has authenticated the user
-    router.get('/auth/google/callback',
-            passport.authenticate('google', {
-                    successRedirect : '/profile',
-                    failureRedirect : '/'
-            }));
-
 
 router.get('/login', notLoggedIn, function(req, res, next) {
   res.render('login.ejs', { message: req.flash('loginMessage') });
@@ -46,7 +36,7 @@ router.get('/lab', function(req, res){
     var userx = "Guest";
   }
   var mongoClient = mongodb.MongoClient;
-  var url = "mongodb://localhost:27017/digF";
+  var url = "mongodb://localhost:27017/labmgmt";
 
   mongoClient.connect(url, function(err, db){
     if(err){
@@ -77,7 +67,7 @@ if(req.isAuthenticated()){
   var xxx = req.params.pdtName;
   //console.log(req.params.pdtID);  
   var mongoClient = mongodb.MongoClient;
-  var url = "mongodb://localhost:27017/digF";
+  var url = "mongodb://localhost:27017/labmgmt";
 
   mongoClient.connect(url, function(err, db){
     if(err){
@@ -142,7 +132,7 @@ if(req.isAuthenticated()){
   var xx = req.params.pdtID;
   var xxx = req.params.pdtName;
   var mongoClient = mongodb.MongoClient;
-  var url = "mongodb://localhost:27017/digF";
+  var url = "mongodb://localhost:27017/labmgmt";
 
   mongoClient.connect(url, function(err, db){
     if(err){
@@ -184,7 +174,7 @@ else{
 router.get('/cart', function(req, res){
   if(req.isAuthenticated()){
   var mongoClient = mongodb.MongoClient;
-  var url = "mongodb://localhost:27017/digF";
+  var url = "mongodb://localhost:27017/labmgmt";
 
   mongoClient.connect(url, function(err, db){
     if(err){
@@ -221,13 +211,10 @@ router.get('/cart', function(req, res){
                 console.log("error reading data");
               }
               else{
-                //console.log(result);
                 res.render("cart", {"cartItems": result, "user": req.user.firstName});
               }
             });
           }
-          //console.log(result);
-          //res.render("lab", {"labequip": result});
         }
       });
     }
@@ -248,7 +235,7 @@ router.get('/view/:pdtID', function(req, res){
     var userx = "Guest";
   }
   var mongoClient = mongodb.MongoClient;
-  var url = "mongodb://localhost:27017/digF";
+  var url = "mongodb://localhost:27017/labmgmt";
 
   mongoClient.connect(url, function(err, db){
     if(err){
@@ -272,59 +259,9 @@ router.get('/view/:pdtID', function(req, res){
     //res.render('viewpdt', {"cartItems": result, "user": userx});  
 });
 
-router.get('/team', function(req, res){
-  if(req.isAuthenticated()){
-    var userx = req.user.firstName;
-  }
-  else{
-    var userx = "Guest";
-  }
-  res.render('team.ejs', {"user": userx});
-});
-
-router.get('/about', function(req, res){
-  if(req.isAuthenticated()){
-    var userx = req.user.firstName;
-  }
-  else{
-    var userx = "Guest";
-  }
-  res.render('about.ejs', {"user": userx});
-});
-
-router.get('/search/:term', function(req, res){
-  if(req.isAuthenticated()){
-    var userx = req.user.firstName;
-  }
-  else{
-    var userx = "Guest";
-  }
-  var mongoClient = mongodb.MongoClient;
-  var url = "mongodb://localhost:27017/digF";
-  mongoClient.connect(url, function(err, db){
-    if(err){
-      console.log("DB connection error");
-    }
-    else{
-      var collection = db.collection('items');
-      collection.find({ $text: { $search: req.params.term } }).toArray(function(err, result){
-        if(err){
-          console.log("error reading data");
-        }
-        else if(result.length){
-          res.render("search.ejs", {"searchItem": result, "user": userx});
-        }else{
-          res.send("No Items match your search");
-        }
-      });
-    }
-  });
-});
-
-
 router.get('/checkout', isLoggedIn, function(req, res){
   var mongoClient = mongodb.MongoClient;
-  var url = "mongodb://localhost:27017/digF";
+  var url = "mongodb://localhost:27017/labmgmt";
 
   mongoClient.connect(url, function(err, db){
     if(err){
@@ -346,14 +283,12 @@ router.get('/checkout', isLoggedIn, function(req, res){
   });
 });
 
-
-
 router.post('/checkoutFinal', function(req, res){
   var obj = JSON.parse(req.body.checkoutDetail);
   console.log(obj.issueItems);
   console.log(req.body.reason);
   var mongoClient = mongodb.MongoClient;
-  var url = "mongodb://localhost:27017/digF";
+  var url = "mongodb://localhost:27017/labmgmt";
 
   mongoClient.connect(url, function(err, db){
     if(err){
