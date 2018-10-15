@@ -1,3 +1,3 @@
 module.exports = {  
-  url: 'mongodb://localhost/digF',
+  url: 'mongodb://localhost/labmgmt',
 };
